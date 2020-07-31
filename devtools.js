@@ -3,4 +3,20 @@
 // chrome.extension.*
 
 // Create a tab in the devtools area
-chrome.devtools.panels.create("DemoPanel", "toast.png", "panel.html", function(panel) {});
+chrome.devtools.panels.create("Network Timestamps", "toast.png", "panel.html", function (panel) { });
+
+chrome.devtools.network.onRequestFinished.addListener(
+    function (request) {
+        if (!request.request.url.includes('chrome-extension')) {
+            const timeStamp = `${request.startedDateTime.split(/T(.*)?Z$/)[1]}`
+            const [_ignore, protocol, uri] = request.request.url.split(/^(.*?)\:\/?\/?/);
+            chrome.devtools.inspectedWindow.eval(`console.log("${timeStamp} %c${(uri && uri.length > 254) ? uri.slice(0, 254) : uri} %c[${protocol}]", "color:rgb(99, 179, 248)", "color:#FFEFD5")`);
+            chrome.extension.sendMessage({ timeStamp, protocol, uri, request:request.request, response:request.response });
+            console.dir(request);
+        }
+    }
+);
+
+// want request.request.url
+// also request.startedDateTime
+

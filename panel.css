@@ -1,0 +1,26 @@
+.record {
+    display: grid;
+    grid-template-columns: 3em 7em 3em 120em 3em;
+}
+
+.index {
+    color: grey;
+}
+
+.time {
+    color: #dcdcaa;
+    margin: 0px 5px;
+    width: fit-content;
+}
+
+.protocol {
+    color: #d1977f;
+}
+
+.target {
+    color: #63b3f8;
+}
+
+.status {
+    color: #75b570;
+}

@@ -1,7 +1,7 @@
 {
-    "name": "DevToolsPanel",
-    "version": "0.1",
-    "description": "A bare-bones example of communication between devtools and an inspected page",
+    "name": "Network Timestamps",
+    "version": "1.0",
+    "description": "Adding timestamps to network calls to sync with video and EME logger",
     "devtools_page": "devtools.html",
     "background": {
         "scripts": [
@@ -11,7 +11,8 @@
     "permissions": [
         "tabs", 
         "http://*/*",
-        "https://*/*"
+        "https://*/*",
+        "clipboardWrite"
     ],
     "manifest_version": 2
 }
