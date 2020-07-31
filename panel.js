@@ -20,7 +20,8 @@ document.querySelector('#insertmessagebutton').onclick = function clearLog() {
 document.getElementById('copyButton').onclick = () => {
     console.table([tableHeader].concat(tableData));
     const csv = [tableHeader].concat(tableData).map(row => row.join('\t')).join('\n');
-    navigator.clipboard.writeText(csv).then(result => console.log('successfully copied to clipboard')).catch(err => console.error(err));
+    //navigator.clipboard.writeText(csv).then(result => console.log('successfully copied to clipboard')).catch(err => console.error(err));
+    //TODO try sending this to the inspected page then to the clipboard
 }
 
 const entry = [
