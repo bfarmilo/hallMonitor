@@ -8,11 +8,17 @@
             "background.js"
         ]
     },
+    "browser_action":{
+        "default_title":"Show network accesses",
+        "default_icon": "toast.png",
+        "default_popup": "panel.html"
+    },
     "permissions": [
         "tabs", 
         "http://*/*",
         "https://*/*",
-        "clipboardWrite"
+        "clipboardWrite",
+        "pageCapture"
     ],
     "manifest_version": 2
 }
