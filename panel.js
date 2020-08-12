@@ -39,7 +39,7 @@ const sendToClipboard = (payload, mode = 'oldSchool') => {
         }
         document.body.removeChild(input);
     } else if (mode === 'inject') {
-        // throws a focus error
+        // have to click on the main page within 3 secons
         const content = `setTimeout(() => {
             navigator.clipboard.writeText(\`${payload}\`)
             .then(result => console.log('success'))
@@ -47,15 +47,20 @@ const sendToClipboard = (payload, mode = 'oldSchool') => {
         }, 3000)`;
         sendObjectToInspectedPage({ action: 'code', content });
     } else if (mode === 'file') {
-        //TODO try to save-as
+        //Works from the devtools, may need to click on page?
         const content = `
             function handleDownload() {
-                const blob = new Blob([\`${payload}\`], {type: 'text/plain'});
-                const url = window.URL.createObjectURL(blob);
-                document.getElementById("myDownload").href = url;
-                setTimeout(() => {
-                window.URL.revokeObjectURL(url);
-                }, 10000);
+                try {
+                    const blob = new Blob([\`${payload}\`], {type: 'text/plain'});
+                    const url = window.URL.createObjectURL(blob);
+                    document.getElementById("myDownload").href = url;
+                    setTimeout(() => {
+                    window.URL.revokeObjectURL(url);
+                    }, 10000);
+                    console.log('download started');
+                } catch (err) {
+                    console.error(err);
+                }
             }
 
             (function() {
